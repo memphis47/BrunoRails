@@ -20,16 +20,8 @@
     <%= f.number_field :age %>
   </div>
   <div class="field">
-    <% @orchestra.each do |orchestra| %>
-      <tr>
-        <td><%= orchestra.name %></td>
-        <td><%= orchestra.city %></td>
-        <td><%= orchestra.conductor_id %></td>
-        <td><%= link_to 'Show', orchestra %></td>
-        <td><%= link_to 'Edit', edit_orchestra_path(orchestra) %></td>
-        <td><%= link_to 'Destroy', orchestra, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <% options = options_from_collection_for_select(@orchestra, 'id', 'name') %>
+    <%= f.select :name,  options %>
   </div>
   <div class="actions">
     <%= f.submit %>
