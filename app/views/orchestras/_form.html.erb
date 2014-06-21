@@ -1,0 +1,29 @@
+<%= form_for(@orchestra) do |f| %>
+  <% if @orchestra.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@orchestra.errors.count, "error") %> prohibited this orchestra from being saved:</h2>
+
+      <ul>
+      <% @orchestra.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :city %><br>
+    <%= f.text_field :city %>
+  </div>
+  <div class="field">
+    <%= f.label :conductor_id %><br>
+    <%= f.number_field :conductor_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

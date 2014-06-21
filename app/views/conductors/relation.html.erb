@@ -1,0 +1,16 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Deseja fazer a relação do seu maestro: </strong> 
+  <%= @conductor.name %>
+  <strong>com qual Orquestra ?</strong>
+</p>
+
+<p>
+  <strong>Orquestras:</strong>
+  <% options = options_from_collection_for_select(@orchestra, 'id', 'name') %>
+  <%= f.select :all_val,  options %>
+</p>
+
+<%= link_to 'Edit', edit_conductor_path(@conductor) %> |
+<%= link_to 'Back', conductors_path %>

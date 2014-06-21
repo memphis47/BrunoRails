@@ -1,0 +1,37 @@
+<%= form_for(@conductor) do |f| %>
+  <% if @conductor.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@conductor.errors.count, "error") %> prohibited this conductor from being saved:</h2>
+
+      <ul>
+      <% @conductor.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :age %><br>
+    <%= f.number_field :age %>
+  </div>
+  <div class="field">
+    <% @orchestra.each do |orchestra| %>
+      <tr>
+        <td><%= orchestra.name %></td>
+        <td><%= orchestra.city %></td>
+        <td><%= orchestra.conductor_id %></td>
+        <td><%= link_to 'Show', orchestra %></td>
+        <td><%= link_to 'Edit', edit_orchestra_path(orchestra) %></td>
+        <td><%= link_to 'Destroy', orchestra, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

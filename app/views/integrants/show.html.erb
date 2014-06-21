@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Nome:</strong>
+  <%= @integrant.nome %>
+</p>
+
+<p>
+  <strong>Orchestra:</strong>
+  <%= @integrant.orchestra_id %>
+</p>
+
+<p>
+  <strong>Instrument:</strong>
+  <%= @integrant.instrument_id %>
+</p>
+
+<p>
+  <strong>Conductor:</strong>
+  <%= @integrant.conductor_id %>
+</p>
+
+<%= link_to 'Edit', edit_integrant_path(@integrant) %> |
+<%= link_to 'Back', integrants_path %>

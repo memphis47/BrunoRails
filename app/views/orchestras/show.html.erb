@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @orchestra.name %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @orchestra.city %>
+</p>
+
+<p>
+  <strong>Conductor:</strong>
+  <%= @orchestra.conductor_id %>
+</p>
+
+<%= link_to 'Edit', edit_orchestra_path(@orchestra) %> |
+<%= link_to 'Back', orchestras_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @conductor.name %>
+</p>
+
+<p>
+  <strong>Age:</strong>
+  <%= @conductor.age %>
+</p>
+
+<%= link_to 'Edit', edit_conductor_path(@conductor) %> |
+<%= link_to 'Back', conductors_path %>
