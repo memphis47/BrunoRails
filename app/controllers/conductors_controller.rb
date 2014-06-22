@@ -16,23 +16,32 @@ class ConductorsController < ApplicationController
   # GET /conductors/new
   def new
     @conductor = Conductor.new
-    @orchestra = Orchestra.find(:all)
+    @orchestra = Orchestra.all
+    @orchestas=Orchestra.new
   end
 
   # GET /conductors/1/edit
   def edit
-    @orchestra = Orchestra.find(:all)
+    @orchestra = Orchestra.all
   end
 
   # POST /conductors
   # POST /conductors.json
   def create
     @conductor = Conductor.new(conductor_params)
-
+    #@orchestas = Orchestra.new()
     respond_to do |format|
       if @conductor.save
-        format.html { redirect_to @conductor, notice: 'Conductor was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @conductor }
+        @orcs=Orchestra.where(id: params[:orchestas][:id])
+        @orcs.first.conductor_id=@conductor.id
+    
+        if @orcs.first.save
+          format.html { redirect_to @conductor, notice: 'Conductor was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @conductor }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @conductor.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render action: 'new' }
         format.json { render json: @conductor.errors, status: :unprocessable_entity }
@@ -45,8 +54,21 @@ class ConductorsController < ApplicationController
   def update
     respond_to do |format|
       if @conductor.update(conductor_params)
-        format.html { redirect_to @conductor, notice: 'Conductor was successfully updated.' }
-        format.json { head :no_content }
+        @orcs=Orchestra.where(conductor_id: @conductor.id)
+        if(@orcs.first!=nil)
+          @orcs.first.conductor_id=nil
+          @orcs.first.save
+        end
+        @orcs=Orchestra.where(id: params[:orchestas][:id])
+        @orcs.first.conductor_id=@conductor.id
+    
+        if @orcs.first.save
+          format.html { redirect_to @conductor, notice: 'Conductor was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @conductor }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @conductor.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render action: 'edit' }
         format.json { render json: @conductor.errors, status: :unprocessable_entity }

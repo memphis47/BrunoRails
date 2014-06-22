@@ -7,18 +7,26 @@
 
 <p>
   <strong>Orchestra:</strong>
-  <%= @integrant.orchestra_id %>
+  <%= 	@search = Orchestra.find(:all,:conditions => {:id => @integrant.orchestra_id})
+  		if(@search.first!=nil)
+            @search.first.name
+        else
+        	@search=''
+        end
+    %>
 </p>
 
 <p>
   <strong>Instrument:</strong>
-  <%= @integrant.instrument_id %>
+  <%= 	@search = Instrument.find(:all,:conditions => {:id => @integrant.instrument_id})
+  		if(@search.first!=nil)
+            @search.first.name
+        else
+        	@search=''
+        end
+    %>
 </p>
 
-<p>
-  <strong>Conductor:</strong>
-  <%= @integrant.conductor_id %>
-</p>
 
 <%= link_to 'Edit', edit_integrant_path(@integrant) %> |
 <%= link_to 'Back', integrants_path %>

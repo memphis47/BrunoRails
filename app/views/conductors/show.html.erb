@@ -10,5 +10,16 @@
   <%= @conductor.age %>
 </p>
 
+<p>
+  <strong>Orchestra:</strong>
+  <%= 	@search = Orchestra.find(:all,:conditions => {:conductor_id => @conductor.id})
+  		if(@search.first!=nil)
+            @search.first.name
+        else
+        	@search=''
+        end
+    %>
+</p>
+
 <%= link_to 'Edit', edit_conductor_path(@conductor) %> |
 <%= link_to 'Back', conductors_path %>

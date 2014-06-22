@@ -15,23 +15,32 @@ class OrchestrasController < ApplicationController
   # GET /orchestras/new
   def new
     @orchestra = Orchestra.new
+    @conductor = Conductor.all
   end
 
   # GET /orchestras/1/edit
   def edit
+    @conductor = Conductor.all
   end
 
   # POST /orchestras
   # POST /orchestras.json
   def create
     @orchestra = Orchestra.new(orchestra_params)
-
-    respond_to do |format|
-      if @orchestra.save
-        format.html { redirect_to @orchestra, notice: 'Orchestra was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @orchestra }
-      else
-        format.html { render action: 'new' }
+    if(!Orchestra.where(name: @orchestra.name).exists?(conditions = :none))
+      respond_to do |format|
+        if @orchestra.save
+          format.html { redirect_to @orchestra, notice: 'Orchestra was successfully created.' }
+          format.json { render action: 'show', status: :created, location: @orchestra }
+        else
+          format.html { render action: 'new' }
+          format.json { render json: @orchestra.errors, status: :unprocessable_entity }
+        end
+      end
+    else
+      respond_to do |format|
+        @conductor = Conductor.all
+        format.html { render action: "new" , notice: 'orquestra jah criada'}
         format.json { render json: @orchestra.errors, status: :unprocessable_entity }
       end
     end

@@ -1,3 +1,5 @@
+
+
 <%= form_for(@orchestra) do |f| %>
   <% if @orchestra.errors.any? %>
     <div id="error_explanation">
@@ -20,8 +22,9 @@
     <%= f.text_field :city %>
   </div>
   <div class="field">
-    <%= f.label :conductor_id %><br>
-    <%= f.number_field :conductor_id %>
+    <p><strong>Selecione uma dos maestros para relacionar com a Orquestra</strong></p>
+    <% options = options_from_collection_for_select(@conductor, 'id', 'name') %>
+    <%= f.select :conductor_id,  options %>
   </div>
   <div class="actions">
     <%= f.submit %>

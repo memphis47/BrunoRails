@@ -15,12 +15,16 @@ class IntegrantsController < ApplicationController
   # GET /integrants/new
   def new
     @integrant = Integrant.new
+    @orchestra = Orchestra.all
+    @conductor = Conductor.all
+    @instrument= Instrument.all
   end
 
   # GET /integrants/1/edit
   def edit
-    @orchestra = Orchestra.new
     @orchestra = Orchestra.all
+    @conductor = Conductor.all
+    @instrument= Instrument.all
   end
 
   # POST /integrants
