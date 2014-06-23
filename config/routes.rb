@@ -1,4 +1,6 @@
 Orquestra::Application.routes.draw do
+  resources :users
+
   resources :orchestras
 
   resources :conductors
